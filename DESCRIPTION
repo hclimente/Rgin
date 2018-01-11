@@ -1,7 +1,7 @@
 Package: Rgin
 Title: gin in R.
 Version: 0.0.0.9000
-Authors@R: person("Hector", "Climente", email = "hector.climente@curie.fr", role = c("aut", "cre")),
+Authors@R: c(person("Hector", "Climente", email = "hector.climente@curie.fr", role = c("aut", "cre")),
   person("Chloe-Agathe", "Azencott", role = "aut"))
 Description: C++ implementation of SConES.
 Depends: R (>= 3.4.2)
