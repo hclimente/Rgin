@@ -27,7 +27,8 @@ OBJECTS+=$(CEPHESOBJ)
 
 PKG_CXXFLAGS = \
   $(SHLIB_OPENMP_CFLAGS) \
-  $(DFLAGS) -I./include -I./lib
+  $(DFLAGS) -I./include -I./lib \
+  -D AS_GINLIB=1
 
 PKG_LIBS = -pthread \
   $(SHLIB_OPENMP_CFLAGS)
