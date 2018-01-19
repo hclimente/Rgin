@@ -1,0 +1,7 @@
+language: r
+
+os: linux
+dist: trusty
+
+cache: packages
+r_build_args: --resave-data
