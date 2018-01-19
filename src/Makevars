@@ -45,6 +45,8 @@ $(SHLIB): libs
 
 libs: libgin.a libmaxflow.a libcephes.a
 	cp -r include "${R_PACKAGE_DIR}"
+	cp -r lib/Cephes "${R_PACKAGE_DIR}"
+	cp -r lib/maxflow "${R_PACKAGE_DIR}"
 	mkdir -p "${R_PACKAGE_DIR}/usrlib${R_ARCH}"
 	cp libgin.a libmaxflow.a libcephes.a "${R_PACKAGE_DIR}/usrlib${R_ARCH}"
 

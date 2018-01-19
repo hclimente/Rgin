@@ -1,2 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.travis\.yml$
+^src/\.travis\.yml$
+^src/CMakeLists\.txt$
+^src/LICENSE
+^src/README\.md$
+^src/install_gin\.sh$
