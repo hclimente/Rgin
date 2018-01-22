@@ -6,7 +6,6 @@
 #include <Eigen/SVD>
 
 #include <cmath>
-#include <iostream>
 
 #include "gin/globals.h"
 /*
@@ -31,7 +30,7 @@ inline uint64 factorial(uint64 const& n) {
 */
 inline float64 tbeta(float64 const& x, float64 const& y) {
 	if(x<0 || y<0) {
-		std::cout << RED << "ERROR in tbeta: x and y cannot be negative" << BLACK << std::endl;
+		logging(GIN_ERROR,"ERROR in tbeta: x and y cannot be negative");
 		throw(1);
 	}
 	return tgamma(x)*tgamma(y)/tgamma(x+y); 
