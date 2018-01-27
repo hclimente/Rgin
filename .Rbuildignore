@@ -6,3 +6,4 @@
 ^src/LICENSE
 ^src/README\.md$
 ^src/install_gin\.sh$
+^appveyor\.yml$
