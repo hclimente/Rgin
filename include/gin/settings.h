@@ -5,19 +5,29 @@
 #ifndef GIN_SETTINGS_H
 #define GIN_SETTINGS_H
 
-#include "boost/program_options.hpp"
 #include "gin/globals.h"
 
+#ifndef AS_GINLIB
+
+#include "boost/program_options.hpp"
 namespace po = boost::program_options;
+
+#endif
 
 class Settings
 {
 public:
 
+	#ifndef AS_GINLIB
 	Settings(int argc, const char* const argv[]) {
 		__error = false;
 		__parseOptions(argc, argv);
 	}
+
+	void printHelp() {
+		logging(GIN_INFO, __options());
+	}
+	#endif
 
 	Settings(std::string pedBasename, std::string networkFilename, uint encoding, uint modelScore, uint associationScore, VectorXd eta, VectorXd lambda, std::string output) {
 		__error = false;
@@ -30,10 +40,6 @@ public:
 		__etas = eta;
 		__lambdas = lambda;
 		__output = output;
-	}
-
-	void printHelp() {
-		std::cout << __options() << "\n";
 	}
 
 	std::string pedBasename() { return __pedBasename; }
@@ -64,6 +70,8 @@ private:
 	uint __encoding;
 
 	bool __error;
+
+	#ifndef AS_GINLIB
 
 	po::options_description __options() {
 		po::options_description desc("Allowed options");
@@ -122,7 +130,7 @@ private:
 		} else if(snp_encoding == "codominant") {
 			__encoding = 3;
 		} else {
-			logging(ERROR,"Encoding does not exist!");
+			logging(GIN_ERROR,"Encoding does not exist!");
 			__error = true;
 		}
 
@@ -153,6 +161,8 @@ private:
 
 
 	}
+
+	#endif //AS_GINLIB
 
 };
 

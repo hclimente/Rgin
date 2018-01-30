@@ -1,4 +1,5 @@
 #include "gin/io/CLogging.h"
+#include "gin/utils/utils.h"
 
 CLogging::CLogging() {
 	file_logging = false;
@@ -8,8 +9,8 @@ CLogging::CLogging(std::string const& filename) {
 	__filename = filename;
 	__ofs.open(filename.c_str());
 	if(!__ofs.is_open()) {
-		logging(ERROR,"Could not open log file. Only screen logging supported!");
-		exit(-1);
+		logging(GIN_ERROR,"Could not open log file. Only screen logging supported!");
+		abort_gin(-1);
 	} else {
 		file_logging = true;
 	}
@@ -23,7 +24,7 @@ CLogging::~CLogging() {
 void CLogging::log(std::string const& mode, std::string const& msg) {
 	if(file_logging) {
 		logging(mode,msg);
-		if(mode==ERROR) {
+		if(mode==GIN_ERROR) {
 			time_t rt;
 			struct tm* ct;
 			time(&rt);

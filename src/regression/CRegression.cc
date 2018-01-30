@@ -99,13 +99,13 @@ void CRegression::print() {
 	parameters = "\t\tBetas\t\tSTD Betas\n";
 	for(uint i=0; i<_n_features;i++) {
 		if(_intercept && i==0){
-		       	formula += " 1";
+			formula += " 1";
 			parameters += "(Intercept)\t";
 			parameters += StringHelper::to_string<float64>(_betas[i]) + "\t";
 			parameters += StringHelper::to_string<float64>(getStdBetas()[i]) + "\n";
 		}
 		else if(_intercept==false && i==0) {
-		       	formula += " x" + StringHelper::to_string<uint>(i+1);
+			formula += " x" + StringHelper::to_string<uint>(i+1);
 			parameters += "x" + StringHelper::to_string<uint>(i+1) + "\t\t";
 			parameters += StringHelper::to_string<float64>(_betas[i]) + "\t";
 			parameters += StringHelper::to_string<float64>(getStdBetas()[i]) + "\n";
@@ -118,13 +118,11 @@ void CRegression::print() {
 		}
 	}
 	
-	std::cout << formula << "\n\n";
-	std::cout << "Estimated Parameters: \n";
-	std::cout << parameters << "\n\n";
-	std::cout << "LogLikelihood:\t" << getLogLikelihood() << "\n";
-	std::cout << "AIC:\t" << getAIC() << "\n";
-	std::cout << "AICc:\t" << getAICc() << "\n";
-	std::cout << "BIC:\t" << getBIC() << "\n";
+	logging(GIN_INFO, formula + "\n");
+	logging(GIN_INFO, "Estimated Parameters:\n" + parameters);
+	logging(GIN_INFO, "AIC: " + StringHelper::to_string<float64>(getAIC()));
+	logging(GIN_INFO, "AICc: " + StringHelper::to_string<float64>(getAICc()));
+	logging(GIN_INFO, "BIC: " + StringHelper::to_string<float64>(getBIC()));
 	
 }
 
@@ -179,7 +177,7 @@ void CLinearRegression::_estimateLogLikelihood() {
 	_rank = luX.rank();
 	__variance = (_residuals.transpose()*_residuals);
 	__variance = __variance/(_n_samples-_rank);
-	_loglikelihood = -(_n_samples/2.0f) * log(2.0f*PI*__variance) - 1.0f/(2.0f*__variance) * (_residuals.array().pow(2)).sum();
+	_loglikelihood = -(_n_samples/2.0f) * log(2.0f*GIN_PI*__variance) - 1.0f/(2.0f*__variance) * (_residuals.array().pow(2)).sum();
 	
 	/* This is only if matrix is not invertible
 	MatrixXd pinv_x;
@@ -532,10 +530,10 @@ void CLinearMixedRegression::__evaluateNLL(float64 const& ldelta, VectorXd* beta
 		float64 ldetXSX = (log(tmp_S.array())).sum();
 		//compute LogLikelihood
 		(*sigma) = _residuals.sum()/(_n_samples-_n_features);
-		(*logLikelihood) = 0.5*(_n_samples-_n_features)*log((*sigma)) + 0.5*((_n_samples-_n_features)*log(2.0*PI)+ldet+tmp+ldetXSX+(_n_samples-_n_features));
+		(*logLikelihood) = 0.5*(_n_samples-_n_features)*log((*sigma)) + 0.5*((_n_samples-_n_features)*log(2.0*GIN_PI)+ldet+tmp+ldetXSX+(_n_samples-_n_features));
 	} else {
 		(*sigma) = _residuals.sum()/_n_samples;
-		(*logLikelihood) = 0.5*(_n_samples*log(2.0*PI*(*sigma))+ldet+_n_samples);
+		(*logLikelihood) = 0.5*(_n_samples*log(2.0*GIN_PI*(*sigma))+ldet+_n_samples);
 	}
 
 	__covarianceBetas = xSx.inverse();
@@ -594,7 +592,7 @@ void CLinearMixedRegression::predict(VectorXd* results,MatrixXd const& x,MatrixX
         xtmp << x;
         VectorXd fixed_component = xtmp*_betas;
 		//MatrixXd random_component = __K.array()+exp(__logDelta);
-        //logging(STATUS,random_component.sum());
+        //logging(GIN_STATUS,random_component.sum());
         MatrixXd identity = MatrixXd::Identity(__K.rows(),__K.cols());
 		MatrixXd random_component = __K.array()+identity.array()*exp(__logDelta);
 		random_component = random_component.inverse();
@@ -679,9 +677,9 @@ float64 BrentFunction::evaluate(float64 const& ldelta) {
 		float64 ldetXSX = (log(tmp_S.array())).sum();
 		//compute LogLikelihood
 		float64 sigma = residuals.sum()/(n_samples-n_features);
-		return 0.5*(n_samples-n_features)*log(sigma) + 0.5*((n_samples-n_features)*log(2.0*PI)+ldet+tmp+ldetXSX+(n_samples-n_features));
+		return 0.5*(n_samples-n_features)*log(sigma) + 0.5*((n_samples-n_features)*log(2.0*GIN_PI)+ldet+tmp+ldetXSX+(n_samples-n_features));
 	} else {
 		float64 sigma = residuals.sum()/n_samples;
-		return 0.5*(n_samples*log(2.0*PI*sigma)+ldet+n_samples);
+		return 0.5*(n_samples*log(2.0*GIN_PI*sigma)+ldet+n_samples);
 	}
 }

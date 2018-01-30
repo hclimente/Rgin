@@ -1,6 +1,7 @@
 #include "gin/io/CSconesIO.h"
 #include "gin/io/CIOProgress.h"
 #include "gin/utils/StringHelper.h"
+#include "gin/utils/utils.h"
 
 #include <sstream>
 #include <vector>
@@ -17,7 +18,7 @@ void CSconesIO::readSparseNetworkFile(std::string const& file, GWASData* data) t
 		throw CSconesIOException("Error opening sparse network file " + file);
 	CIOProgress progress(ifs,1);
 	uint fsize = progress.getFileSize();
-	logging(INFO,"File Size: " + StringHelper::to_string<float64>(((float64)fsize)/1024.0/1024.0) + " MB");
+	logging(GIN_INFO,"File Size: " + StringHelper::to_string<float64>(((float64)fsize)/1024.0/1024.0) + " MB");
 	//Create temporary positions map
 	std::map<std::string,uint64> position_map;
 	std::map<std::string,uint64>::iterator piter;
@@ -74,8 +75,8 @@ void CSconesIO::writeOutput(std::string const& outfile, GWASData const& data, Ve
 	std::ofstream ofs;
 	ofs.open(outfile.c_str());
 	if(!ofs.is_open()) {
-		logging(ERROR,"Writing output failed!");
-		exit(-1);
+		logging(GIN_ERROR,"Writing output failed!");
+		abort_gin(-1);
 	}
     ofs << "#Best Lambda:\t" << best_lambda << "\n";
     ofs << "#Best Eta:\t" << best_eta << "\n";
@@ -94,8 +95,8 @@ void CSconesIO::writeOutput(std::string const& outfile, GWASData const& data, Ve
     std::ofstream ofs;
     ofs.open(outfile.c_str());
     if(!ofs.is_open()) {
-        logging(ERROR,"Writing output failed!");
-        exit(-1);
+        logging(GIN_ERROR,"Writing output failed!");
+        abort_gin(-1);
     }
     ofs << "#Best Lambda:\t" << best_lambda << "\n";
     ofs << "#Best Eta:\t" << best_eta << "\n";
@@ -117,8 +118,8 @@ void CSconesIO::writeOutput(std::string const& outfile, GWASData* const& data, V
 	std::ofstream ofs;
 	ofs.open(outfile.c_str());
 	if(!ofs.is_open()) {
-		logging(ERROR,"Writing output failed!");
-		exit(-1);
+		logging(GIN_ERROR,"Writing output failed!");
+		abort_gin(-1);
 	}
 	ofs << "#Best Lambda:\t" << best_lambda << "\n";
 	ofs << "#Best Eta:\t" << best_eta << "\n";
@@ -137,8 +138,8 @@ void CSconesIO::writeCMatrix(std::string const& outfile, MatrixXd const& cmat, C
 	std::ofstream ofs;
 	ofs.open(outfile.c_str());
 	if(!ofs.is_open()) {
-		logging(ERROR,"Writing output failed!");
-		exit(-1);
+		logging(GIN_ERROR,"Writing output failed!");
+		abort_gin(-1);
 	}
     ofs << "\t";
     for(int j=0;j<settings.lambdas.rows();j++) {
@@ -161,8 +162,8 @@ void CSconesIO::writeAdjacencyMatrix(std::string const &outfile, GWASData const 
     std::ofstream ofs;
     ofs.open(outfile.c_str());
     if(!ofs.is_open()) {
-        logging(ERROR,"Writing output failed!");
-        exit(-1);
+        logging(GIN_ERROR,"Writing output failed!");
+        abort_gin(-1);
     }
 
     // convert sparse to dense matrix (painful)
@@ -189,8 +190,8 @@ void CSconesIO::writeAdjacencyMatrix(std::string const &outfile, MatrixXd const&
 	std::ofstream ofs;
 	ofs.open(outfile.c_str());
 	if(!ofs.is_open()) {
-		logging(ERROR,"Writing output failed!");
-		exit(-1);
+		logging(GIN_ERROR,"Writing output failed!");
+		abort_gin(-1);
 	}
 
 	for(int i=0; i<M.rows(); i++) {

@@ -6,7 +6,6 @@
 #include <Eigen/SVD>
 
 #include <cmath>
-#include <iostream>
 
 #include "gin/globals.h"
 /*
@@ -31,7 +30,7 @@ inline uint64 factorial(uint64 const& n) {
 */
 inline float64 tbeta(float64 const& x, float64 const& y) {
 	if(x<0 || y<0) {
-		std::cout << RED << "ERROR in tbeta: x and y cannot be negative" << BLACK << std::endl;
+		logging(GIN_ERROR,"ERROR in tbeta: x and y cannot be negative");
 		throw(1);
 	}
 	return tgamma(x)*tgamma(y)/tgamma(x+y); 
@@ -53,13 +52,13 @@ inline float64 erfinv(float64 const& p) {
 	if(p==-1) return -INFINITY;
 	float64 sign=1.0;
 	if(p<0) sign=-1.0;
-	float64 s = sqrt(PI)/2.0;
+	float64 s = sqrt(GIN_PI)/2.0;
 	float64 z = sqrt(-log(1.0-fabs(p)))*sign;
 	uint iter=0;
 	while(fabs(erf(z)-p)>1e-16*fabs(p)) {
 		z = z - (erf(z)-p)*exp(pow(z,2))*s;
 		if(iter>1000) {
-			logging(WARNING,"Maxiterations reached in erfinv");
+			logging(GIN_WARNING,"Maxiterations reached in erfinv");
 			break;
 		}
 		iter++;
