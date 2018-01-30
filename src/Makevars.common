@@ -1,3 +1,6 @@
+#################################
+##         .o to compile       ##
+#################################
 GINOBJ_0 = feature_selection/feature_selector.o feature_selection/scones.o feature_selection/shake.o \
 	gwas/CGWASData.o gwas/CScones.o gwas/CSingleTraitGWAS.o \
 	io/CGWASDataIO.o io/CIOProgress.o io/CLogging.o io/CPlinkParser.o io/CSconesIO.o io/grid_views.o \
@@ -21,18 +24,24 @@ CEPHESOBJ_0 = acosh.o airy.o asin.o asinh.o atan.o atanh.o bdtr.o beta.o \
 	sqrt.o floor.o setprec.o mtherr.o
 CEPHESOBJ=$(CEPHESOBJ_0:%=lib/Cephes/double/%)
 
-RCPP_INCLUDE= `${R_HOME}/bin/Rscript -e "Rcpp:::CxxFlags()"`
-GIN_LIBS="$(GIN_PATH)libgin.a" "$(GIN_PATH)libmaxflow.a" "$(GIN_PATH)libcephes.a" -lz -pthread
-GIN_CPPFLAGS=-DAS_GINLIB -DAS_RGINLIB
-
+#################################
+##            Flags            ##
+#################################
+PKG_LIBS0 = -pthread \
+  $(SHLIB_OPENMP_CFLAGS) \
+  "${R_PACKAGE_DIR}/usrlib${R_ARCH}/libgin.a" \
+  "${R_PACKAGE_DIR}/usrlib${R_ARCH}/libmaxflow.a" \
+  "${R_PACKAGE_DIR}/usrlib${R_ARCH}/libcephes.a"
 PKG_CXXFLAGS0 = $(SHLIB_OPENMP_CFLAGS) \
   $(DFLAGS) -I./include -I./lib \
-  $(RCPP_INCLUDE) \
+  `${R_HOME}/bin/Rscript -e "Rcpp:::CxxFlags()"`
+DFLAGS = -D_USE_KNETFILE -D_FILE_OFFSET_BITS=64 \
+  -U_FORTIFY_SOURCE -DBGZF_CACHE \
   -DAS_GINLIB -DAS_RGINLIB
 
-PKG_LIBS0 = -pthread \
-  $(SHLIB_OPENMP_CFLAGS)
-
+#################################
+##           Compile           ##
+#################################
 .PHONY: all libs clean
 
 all: $(SHLIB)

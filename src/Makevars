@@ -1,8 +1,14 @@
 include Makevars.common
 
+#################################
+##            Flags            ##
+#################################
 PKG_CXXFLAGS = $(PKG_CXXFLAGS0) -lz
 PKG_LIBS = $(PKG_LIBS0)
 
+#################################
+##           Compile           ##
+#################################
 libs0: libgin.a libmaxflow.a libcephes.a
 
 libgin.a: $(GINOBJ)
