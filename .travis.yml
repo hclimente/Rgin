@@ -1,6 +1,8 @@
 language: r
 
-os: linux
+os: 
+  - linux
+  - osx
 
 cache: packages
 r_build_args: --resave-data
