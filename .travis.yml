@@ -3,6 +3,9 @@ language: r
 os: 
   - linux
   - osx
+  
+r_packages:
+  - digest
 
 cache: packages
 r_build_args: --resave-data
