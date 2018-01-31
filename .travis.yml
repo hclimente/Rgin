@@ -1,11 +1,9 @@
 language: r
 
-os: 
-  - linux
-  - osx
-  
-r_packages:
-  - digest
+os: linux
+
+r:
+  - bioc-devel
 
 cache: packages
 r_build_args: --resave-data
