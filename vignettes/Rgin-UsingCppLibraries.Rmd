@@ -1,0 +1,66 @@
+---
+title: "Using Rgin C++ libraries"
+author: "Héctor Climente-González"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+    %\VignetteIndexEntry{Using Rgin C++ libraries}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
+
+# Use
+
+To use these libraries, the third party package developer needs to (1) discover 
+the appropriate header files when their package is built, and (2) link in the 
+libraries. Note that in order to link correctly across platforms your package 
+must provide both the respective `src/Makevars` and `src/Makevars.win` files.
+
+## Discover header files
+
+To discover appropriate header files at package installation time, add 
+
+`LinkingTo: Rgin`
+
+to the `DESCRIPTION` file, and reference the relevant include files as, for 
+instance,
+
+`#include "gin/bam.h"`
+
+The content of the include files can be found in the `Rgin` source (under 
+`src/include/gin`) or at their installed location.
+
+## Link to static libraries
+
+Linking to the static libraries is accomplished by including the following code 
+in `src/Makevars.win` for `Windows`:
+
+```
+GINVARS=$(shell echo 'cat(Rgin:::.pkgMk())' |\
+"${R_HOME}/bin/R" --vanilla --slave)
+include $(GINVARS)
+PKG_LIBS=$(GIN_LIBS)
+PKG_CPPFLAGS=$(GIN_CPPFLAGS)
+```
+
+and with the following code in `src/Makevars` for all other platforms:
+
+```
+GIN_PATH=`${R_HOME}/bin/Rscript -e "cat(Rgin:::.pkgLd())"`
+GIN_LIBS="$(GIN_PATH)/libgin.a" "$(GIN_PATH)/libcephes.a"\
+    "$(GIN_PATH)/libmaxflow.a" -lz -pthread
+GIN_CPPFLAGS=-D_USE_KNETFILE -DBGZF_CACHE -D_FILE_OFFSET_BITS=64 \
+    -D_LARGEFILE64_SOURCE
+
+PKG_LIBS=$(GIN_LIBS)
+PKG_CPPFLAGS=$(GIN_CPPFLAGS)
+```
+
+This updates the environment variables `$PKG_CPPFLAGS` and `$PKG_LIBS`; if your 
+`Makevars/Makevars.win` modifies these also, do so by adding to the respecitve 
+line, e.g.,
+
+```
+PKG_LIBS=$(GIN_LIBS) -lfoo
+PKG_CPPFLAGS=$(GIN_CPPFLAGS) -I/path/bar
+```

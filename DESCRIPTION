@@ -1,7 +1,9 @@
 Package: Rgin
 Title: gin in R
-Version: 0.0.0.9000
-Authors@R: c(person("Hector", "Climente-Gonzalez", email = "hector.climente@curie.fr", role = c("aut", "cre")),
+Version: 0.9.1
+Authors@R: c(
+  person("Hector", "Climente-Gonzalez", role = c("aut", "cre"), 
+         email = "hector.climente@curie.fr"),
   person("Dominik Gerhard", "Grimm", role = "aut"),
   person("Chloe-Agathe", "Azencott", role = "aut"))
 Description: C++ implementation of SConES.
@@ -12,3 +14,8 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
+biocViews: Software, GenomeWideAssociation, SNP, GeneticVariability, Genetics, 
+  FeatureExtraction, GraphAndNetwork, Network
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
