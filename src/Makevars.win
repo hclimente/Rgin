@@ -18,8 +18,6 @@ PKG_LIBS = ${PKG_LIBS0} -lws2_32
 	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) -c $< -o $@
 
 libs0: libgin.a libmaxflow.a libcephes.a
-	mkdir -p "${R_PACKAGE_DIR}/usretc${R_ARCH}"
-	cp ../Rgin.mk.win "${R_PACKAGE_DIR}/usretc${R_ARCH}/Rgin.mk"
 
 libgin.a: $(GINOBJ)
 
