@@ -1,13 +1,13 @@
 Package: Rgin
 Title: gin in R
-Version: 0.99.1
+Version: 0.99.2
 Authors@R: c(
   person("Hector", "Climente-Gonzalez", role = c("aut", "cre"), 
          email = "hector.climente@curie.fr"),
   person("Dominik Gerhard", "Grimm", role = "aut"),
   person("Chloe-Agathe", "Azencott", role = "aut"))
 Description: C++ implementation of SConES.
-Depends: R (>= 3.4)
+Depends: R (>= 3.5)
 LinkingTo:
   RcppEigen (>= 0.3.3.3.0)
 License: MIT + file LICENSE
