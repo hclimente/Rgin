@@ -8,7 +8,7 @@ Authors@R: c(
   person("Chloe-Agathe", "Azencott", role = "aut"))
 Maintainer: Hector Climente <hector.climente@curie.fr>
 Description: C++ implementation of SConES.
-Depends: R (>= 3.5)
+Depends: R (>= 3.4)
 LinkingTo:
   RcppEigen (>= 0.3.3.3.0)
 License: MIT + file LICENSE
