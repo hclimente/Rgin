@@ -6,7 +6,7 @@ Authors@R: c(
          email = "hector.climente@curie.fr"),
   person("Dominik Gerhard", "Grimm", role = "aut"),
   person("Chloe-Agathe", "Azencott", role = "aut"))
-Maintainer: Hector Climente <hector.climente@curie.fr>
+Maintainer: Hector Climente-Gonzalez <hector.climente@curie.fr>
 Description: C++ implementation of SConES.
 Depends: R (>= 3.5)
 LinkingTo:
