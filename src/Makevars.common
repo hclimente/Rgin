@@ -31,7 +31,7 @@ PKG_LIBS0 = -pthread \
   "${R_PACKAGE_DIR}/usrlib${R_ARCH}/libgin.a" \
   "${R_PACKAGE_DIR}/usrlib${R_ARCH}/libmaxflow.a" \
   "${R_PACKAGE_DIR}/usrlib${R_ARCH}/libcephes.a"
-PKG_CXXFLAGS0 = $(SHLIB_OPENMP_CFLAGS) \
+PKG_CXXFLAGS0 = -std=c++11 $(SHLIB_OPENMP_CFLAGS) \
   $(DFLAGS) -I./include -I./lib \
   `${R_HOME}/bin/Rscript -e "Rcpp:::CxxFlags()"`
 DFLAGS = -D_USE_KNETFILE -D_FILE_OFFSET_BITS=64 \
