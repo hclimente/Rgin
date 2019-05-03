@@ -1,6 +1,6 @@
 Package: Rgin
 Title: gin in R
-Version: 1.3.1
+Version: 1.5.0
 Authors@R: c(
   person("Hector", "Climente-Gonzalez", role = c("aut", "cre"), 
          email = "hector.climente@curie.fr"),
