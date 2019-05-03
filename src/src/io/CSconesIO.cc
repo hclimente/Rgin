@@ -10,7 +10,7 @@
 
 #include <Eigen/Dense>
 
-void CSconesIO::readSparseNetworkFile(std::string const& file, GWASData* data) throw (CSconesIOException){
+void CSconesIO::readSparseNetworkFile(std::string const& file, GWASData* data) {
 	std::ifstream ifs;
 	ifs.open(file.c_str(),std::ifstream::in);
 

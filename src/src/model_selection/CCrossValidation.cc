@@ -14,12 +14,12 @@ CCrossValidation::CCrossValidation(float64 const& seed) {
 	set_seed(__seed);
 }
 
-VectorXd CCrossValidation::getTrainingIndices(uint const& k) const throw (CCrossValidationException) {
+VectorXd CCrossValidation::getTrainingIndices(uint const& k) const {
 	if(k>__trainingData.size()) throw CCrossValidationException("No TrainingIndices for fold k" + StringHelper::to_string<uint>(k));
 	return __trainingData[k];
 }
 
-VectorXd CCrossValidation::getTestingIndices(uint const& k) const throw (CCrossValidationException) {
+VectorXd CCrossValidation::getTestingIndices(uint const& k) const {
 	if(k>__testingData.size()) throw CCrossValidationException("No TestingIndices for fold k" + StringHelper::to_string<uint>(k));
 	return __testingData[k];
 }

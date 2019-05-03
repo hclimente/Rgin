@@ -86,13 +86,13 @@ class CScones {
 		CLinearRegression __linear_regression; //Regression model, either LinearRegression for continuous phenotypes or LogisticRegression for binary
 		CLogisticRegression __logistic_regression; //Regression model, either LinearRegression for continuous phenotypes or LogisticRegression for binary
 
-		void __checkdata() throw (CSconesException);
+		void __checkdata();
 		void __autoParameters();
 		void __selectRegressionModel();
 		void __optimize_objective(VectorXd const&, float64 const&, VectorXd*, float64*);
-		void __gridsearch(VectorXd const&, MatrixXd const&, MatrixXd const&) throw (CSconesException);
-        MatrixXd __evaluateConsistency() throw (CSconesException);
-        MatrixXd __evaluateInformation() throw (CSconesException);
+		void __gridsearch(VectorXd const&, MatrixXd const&, MatrixXd const&);
+        MatrixXd __evaluateConsistency();
+        MatrixXd __evaluateInformation();
 
 		VectorXd __computeScoreStatistic(MatrixXd const&, VectorXd const&);
 		VectorXd __computeSKATScore(MatrixXd const&, VectorXd const&);
@@ -101,14 +101,14 @@ class CScones {
         SparseMatrixXd __computeLaplacianMatrix();
 	public:
 		CScones();
-		CScones(VectorXd const&, MatrixXd const&, SparseMatrixXd const&) throw (CSconesException);
-		CScones(VectorXd const&, MatrixXd const&, SparseMatrixXd const&, MatrixXd const&) throw (CSconesException);
+		CScones(VectorXd const&, MatrixXd const&, SparseMatrixXd const&);
+		CScones(VectorXd const&, MatrixXd const&, SparseMatrixXd const&, MatrixXd const&);
 
 		CScones(CSconesSettings const&);
-		CScones(VectorXd const&, MatrixXd const&, SparseMatrixXd const&, CSconesSettings const&) throw (CSconesException);
-		CScones(VectorXd const&, MatrixXd const&, SparseMatrixXd const&, MatrixXd const&, CSconesSettings const&) throw (CSconesException);
+		CScones(VectorXd const&, MatrixXd const&, SparseMatrixXd const&, CSconesSettings const&);
+		CScones(VectorXd const&, MatrixXd const&, SparseMatrixXd const&, MatrixXd const&, CSconesSettings const&);
 
-		void test_associations() throw (CSconesException);
+		void test_associations();
 		void test_associations(float64 const&, float64 const&);
 		void maxflow(SparseMatrixXd const &, MatrixXd const &, VectorXd *);
         VectorXd getObjectiveFunctionTerms(float64 const&, float64 const&);

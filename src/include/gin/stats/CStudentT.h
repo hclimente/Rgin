@@ -26,17 +26,17 @@ class CStudentTException {
 class CStudentT {
 	
 	private:
-		static void __checkParameters(int const&) throw (CStudentTException);
+		static void __checkParameters(int const&);
 
 	public:
-		static float64 cdf(float64 const&, int const&) throw (CStudentTException);
-		static float64 logcdf(float64 const&, int const&) throw (CStudentTException);
-		static float64 pdf(float64 const&, int const&) throw (CStudentTException);
-		static float64 logpdf(float64 const&, int const&) throw (CStudentTException);
-		static float64 sf(float64 const&, int const&) throw (CStudentTException);
-		static float64 isf(float64 const&, int const&) throw (CStudentTException);
-		static float64 ppf(float64 const&, int const&) throw (CStudentTException);
-		static float64 logsf(float64 const&, int const&) throw (CStudentTException);
+		static float64 cdf(float64 const&, int const&);
+		static float64 logcdf(float64 const&, int const&);
+		static float64 pdf(float64 const&, int const&);
+		static float64 logpdf(float64 const&, int const&);
+		static float64 sf(float64 const&, int const&);
+		static float64 isf(float64 const&, int const&);
+		static float64 ppf(float64 const&, int const&);
+		static float64 logsf(float64 const&, int const&);
 
 };
 	

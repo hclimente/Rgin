@@ -23,7 +23,7 @@ CRegression::CRegression(bool const& intercept) {
 }
 
 void CRegression::_checkDimensions(uint64* n_samples,
-				  uint64* n_features) throw (CRegressionException) {
+				  uint64* n_features) {
 	(*n_samples) = _y.rows();
 	(*n_features) = _x.cols();
 	if(_y.rows()!=_x.rows()) 
@@ -187,7 +187,7 @@ void CLinearRegression::_estimateLogLikelihood() {
 	
 }
 
-void CLinearRegression::predict(VectorXd* results,MatrixXd const& x) throw (CRegressionException) {
+void CLinearRegression::predict(VectorXd* results,MatrixXd const& x) {
 	MatrixXd xtmp(_n_samples,_n_features);
 	if(_intercept) {
 		if(x.cols()!=(int64)_n_features-1) 
@@ -202,22 +202,22 @@ void CLinearRegression::predict(VectorXd* results,MatrixXd const& x) throw (CReg
 }
 
 //Fit Linear Regression Model using maximum likelihood assuming Gaussian Noise
-void CLinearRegression::fit(VectorXd const& y, MatrixXd const& x) throw (CRegressionException) {
+void CLinearRegression::fit(VectorXd const& y, MatrixXd const& x) {
 	_x = x;
 	_y = y;
 	fit(true);
 }
 
-void CLinearRegression::fit(VectorXd const& y, MatrixXd const& x, bool const& estimateLL) throw (CRegressionException) {
+void CLinearRegression::fit(VectorXd const& y, MatrixXd const& x, bool const& estimateLL) {
 	_x = x;
 	_y = y;
 	fit(estimateLL);
 }
-void CLinearRegression::fit() throw(CRegressionException) {
+void CLinearRegression::fit() {
 	fit(true);
 }
 
-void CLinearRegression::fit(bool const& estimateLL) throw(CRegressionException) {
+void CLinearRegression::fit(bool const& estimateLL) {
 	//checkDimensions
 	_checkDimensions(&_n_samples,&_n_features);
 	//Add intercept to x matrix if necessary
@@ -324,7 +324,7 @@ void CLogisticRegression::_estimateLogLikelihood() {
 	_loglikelihood =  ((_y.cwiseProduct(_yhat)).array() - (_yhat.array().exp()+1.0).array().log().array()).array().sum();
 }
 
-void CLogisticRegression::predict(VectorXd* results,MatrixXd const& x) throw (CRegressionException) {
+void CLogisticRegression::predict(VectorXd* results,MatrixXd const& x) {
 	MatrixXd xtmp(_n_samples,_n_features);
 	if(_intercept) {
 		if(x.cols()!=(int64)_n_features-1) 
@@ -338,23 +338,23 @@ void CLogisticRegression::predict(VectorXd* results,MatrixXd const& x) throw (CR
 	}	
 }
 
-void CLogisticRegression::fit(VectorXd const& y, MatrixXd const& x) throw (CRegressionException) {
+void CLogisticRegression::fit(VectorXd const& y, MatrixXd const& x) {
 	_x = x;
 	_y = y;
 	fit(true);
 }
 
-void CLogisticRegression::fit(VectorXd const& y, MatrixXd const& x, bool const& estimateLL) throw (CRegressionException) {
+void CLogisticRegression::fit(VectorXd const& y, MatrixXd const& x, bool const& estimateLL) {
 	_x = x;
 	_y = y;
 	fit(estimateLL);
 }
-void CLogisticRegression::fit() throw(CRegressionException) {
+void CLogisticRegression::fit() {
 	fit(true);
 }
 
 //Fit Linear Regression Model using maximum likelihood assuming Gaussian Noise
-void CLogisticRegression::fit(bool const& estimateLL) throw (CRegressionException) {
+void CLogisticRegression::fit(bool const& estimateLL) {
 	//checkDimensions
 	_checkDimensions(&_n_samples,&_n_features);
 
@@ -567,13 +567,13 @@ float64 CLinearMixedRegression::__optimizeDelta() {
 	return logDelta;
 }
 
-VectorXd CLinearMixedRegression::predict(MatrixXd const& x,MatrixXd const& K) throw (CRegressionException) {
+VectorXd CLinearMixedRegression::predict(MatrixXd const& x,MatrixXd const& K) {
     VectorXd results;
     predict(&results,x,K);
     return results;
 }
 
-void CLinearMixedRegression::predict(VectorXd* results,MatrixXd const& x,MatrixXd const& K) throw (CRegressionException) {
+void CLinearMixedRegression::predict(VectorXd* results,MatrixXd const& x,MatrixXd const& K) {
 	MatrixXd xtmp(x.rows(),_n_features);
 	if(_intercept) {
 		if(x.cols()!=(int64)_n_features-1) 
@@ -601,7 +601,7 @@ void CLinearMixedRegression::predict(VectorXd* results,MatrixXd const& x,MatrixX
 	}	
 }
 
-void CLinearMixedRegression::fit(VectorXd const& y, MatrixXd const& X, MatrixXd const& K) throw (CRegressionException) {
+void CLinearMixedRegression::fit(VectorXd const& y, MatrixXd const& X, MatrixXd const& K) {
 	_x = X;
 	_y = y;
 	__K = K;
@@ -609,7 +609,7 @@ void CLinearMixedRegression::fit(VectorXd const& y, MatrixXd const& X, MatrixXd 
 }
 
 //Fit LinearMixed Regression Model using maximum likelihood assuming Gaussian Noise
-void CLinearMixedRegression::fit() throw (CRegressionException) {
+void CLinearMixedRegression::fit() {
 	//checkDimensions
 	_checkDimensions(&_n_samples,&_n_features);
 	//Add intercept to x matrix if necessary

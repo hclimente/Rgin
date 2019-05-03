@@ -4,59 +4,59 @@
 
 #include "Cephes/cephes.h"
 
-/*void CGamma::__checkParameters(float64 const& x, float64 const& k, float64 const& theta) throw (CGammaException) {
+/*void CGamma::__checkParameters(float64 const& x, float64 const& k, float64 const& theta) {
 	if (theta==0 || k==0) throw CGammaException("Theta and k cannont be zero!");
 	else if (theta<0 || k<0 || x<0) throw CGammaException("Theta, k and x cannont be negative!");
 }*/
 
-void CGamma::__checkParameters(float64 const& x, float64 const& k) throw (CGammaException) {
+void CGamma::__checkParameters(float64 const& x, float64 const& k) {
 	if (k==0) throw CGammaException("Theta and k cannont be zero!");
 	else if (k<0 || x<0) throw CGammaException("Theta, k and x cannont be negative!");
 }
 
-float64 CGamma::cdf(float64 const& x, float64 const& k) throw (CGammaException) {
+float64 CGamma::cdf(float64 const& x, float64 const& k) {
     return Cephes::igam(k,x);
 }
 
-float64 CGamma::logcdf(float64 const& x, float64 const& k) throw (CGammaException) {
+float64 CGamma::logcdf(float64 const& x, float64 const& k) {
     return log(cdf(x,k));
 }
 
-float64 CGamma::sf(float64 const& x, float64 const& k) throw (CGammaException) {
+float64 CGamma::sf(float64 const& x, float64 const& k) {
 	return Cephes::igamc(k,x);
 }
 
-float64 CGamma::logsf(float64 const& x, float64 const& k) throw (CGammaException) {
+float64 CGamma::logsf(float64 const& x, float64 const& k) {
     return log(sf(x,k));
 }
 
-float64 CGamma::pdf(float64 const& x, float64 const& k) throw (CGammaException) {
+float64 CGamma::pdf(float64 const& x, float64 const& k) {
 	return (pow(x,k-1)*exp(-x))/tgamma(k);
 }
 
-float64 CGamma::logpdf(float64 const& x, float64 const& k) throw (CGammaException) {
+float64 CGamma::logpdf(float64 const& x, float64 const& k) {
     return log(pdf(x,k));
 }
 
 /*
-float64 CGamma::cdf(float64 const& x, float64 const& k, float64 const& theta) throw (CGammaException) {
+float64 CGamma::cdf(float64 const& x, float64 const& k, float64 const& theta) {
 	__checkParameters(x,k,theta);
     return Cephes::igam(k,x);
     //OWN IMPLEMENTATION
     //return Special::regularizedLowerIncompleteGamma(x/theta,k);
 }
 
-float64 CGamma::logcdf(float64 const& x, float64 const& k, float64 const& theta) throw (CGammaException) {
+float64 CGamma::logcdf(float64 const& x, float64 const& k, float64 const& theta) {
 	__checkParameters(x,k,theta);
 	return log(cdf(x,k,theta));
 }
 
-float64 CGamma::sf(float64 const& x, float64 const& k, float64 const& theta) throw (CGammaException) {
+float64 CGamma::sf(float64 const& x, float64 const& k, float64 const& theta) {
 	__checkParameters(x,k,theta);
 	return 1.0-cdf(x,k,theta);
 }
 
-float64 CGamma::logsf(float64 const& x, float64 const& k, float64 const& theta) throw (CGammaException) {
+float64 CGamma::logsf(float64 const& x, float64 const& k, float64 const& theta) {
 	__checkParameters(x,k,theta);
 	return log(sf(x,k,theta));
 }
@@ -64,7 +64,7 @@ float64 CGamma::logsf(float64 const& x, float64 const& k, float64 const& theta) 
 
 
 /*
-float64 CGamma::pdf(float64 const& x, float64 const& k, float64 const& theta=1.0) throw (CGammaException) {
+float64 CGamma::pdf(float64 const& x, float64 const& k, float64 const& theta=1.0) {
 	__checkParameters(x,k,theta);
 	return (pow(x,k-1)*exp(-x/theta))/(pow(theta,k)*tgamma(k));
 }
@@ -72,7 +72,7 @@ float64 CGamma::pdf(float64 const& x, float64 const& k, float64 const& theta=1.0
 
 
 /*
-float64 CGamma::logpdf(float64 const& x, float64 const& k, float64 const& theta) throw (CGammaException) {
+float64 CGamma::logpdf(float64 const& x, float64 const& k, float64 const& theta) {
 	__checkParameters(x,k,theta);
 	return log(pdf(x,k,theta));
 }

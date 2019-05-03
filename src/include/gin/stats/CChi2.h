@@ -31,19 +31,19 @@ class CChi2Exception {
 class CChi2 {
 
 private:
-	static void __checkParameters(float64 const &) throw(CChi2Exception);
+	static void __checkParameters(float64 const &);
 
 public:
-	static float64 cdf(float64 const &, float64 const &) throw(CChi2Exception);
-	static float64 logcdf(float64 const &, float64 const &) throw(CChi2Exception);
-	static float64 pdf(float64 const &, float64 const &) throw(CChi2Exception);
-	static float64 logpdf(float64 const &, float64 const &) throw(CChi2Exception);
-	static float64 sf(float64 const &, float64 const &) throw(CChi2Exception);
-	static float64 isf(float64 const &, float64 const &) throw(CChi2Exception);
-	static float64 logsf(float64 const &, float64 const &) throw(CChi2Exception);
-	static MatrixXd get2DContingencyTable(VectorXd const &, VectorXd const &, bool) throw(CChi2Exception);
-	static double calculateChi2(MatrixXd const &) throw(CChi2Exception);
-	static double calculateChi2Trend(MatrixXd const &, VectorXd const &) throw(CChi2Exception);
+	static float64 cdf(float64 const &, float64 const &);
+	static float64 logcdf(float64 const &, float64 const &);
+	static float64 pdf(float64 const &, float64 const &);
+	static float64 logpdf(float64 const &, float64 const &);
+	static float64 sf(float64 const &, float64 const &);
+	static float64 isf(float64 const &, float64 const &);
+	static float64 logsf(float64 const &, float64 const &);
+	static MatrixXd get2DContingencyTable(VectorXd const &, VectorXd const &, bool);
+	static double calculateChi2(MatrixXd const &);
+	static double calculateChi2Trend(MatrixXd const &, VectorXd const &);
 
 };
 

@@ -43,16 +43,16 @@ class CRegression {
 		float64 _loglikelihood;
 		uint _rank;
 
-		void _checkDimensions(uint64*,uint64*) throw (CRegressionException);
+		void _checkDimensions(uint64*,uint64*);
 	public:
 		CRegression();
 		CRegression(bool const&);
 		~CRegression() {};
 		
-		virtual void fit() throw (CRegressionException) {};
-		virtual void fit(bool const&) throw (CRegressionException) {};
-		virtual void fit(VectorXd const&, MatrixXd const&) throw (CRegressionException) {};
-		//virtual void fit(VectorXd const&, MatrixXd const&, bool const&) throw (CRegressionException) {};
+		virtual void fit()  {};
+		virtual void fit(bool const&)  {};
+		virtual void fit(VectorXd const&, MatrixXd const&)  {};
+		//virtual void fit(VectorXd const&, MatrixXd const&, bool const&)  {};
 
 		//Several Getter Methods
 		virtual MatrixXd getCovarianceBetas();
@@ -100,11 +100,11 @@ class CLinearRegression: public CRegression {
 		float64 getMSE();
 		float64 getRMSE();
 		
-		void fit() throw (CRegressionException);
-		void fit(bool const&) throw (CRegressionException);
-		void fit(VectorXd const&, MatrixXd const&) throw (CRegressionException);
-		void fit(VectorXd const&, MatrixXd const&, bool const&) throw (CRegressionException);
-		void predict(VectorXd*,MatrixXd const&) throw (CRegressionException);
+		void fit();
+		void fit(bool const&);
+		void fit(VectorXd const&, MatrixXd const&);
+		void fit(VectorXd const&, MatrixXd const&, bool const&);
+		void predict(VectorXd*,MatrixXd const&);
 		
 };
 
@@ -134,11 +134,11 @@ class CLogisticRegression: public CRegression {
 		VectorXd getStdBetas();
 		VectorXd getYHat();
 
-		void fit() throw (CRegressionException);
-		void fit(bool const&) throw (CRegressionException);
-		void fit(VectorXd const&, MatrixXd const&) throw (CRegressionException);
-		void fit(VectorXd const&, MatrixXd const&, bool const&) throw (CRegressionException);
-		void predict(VectorXd*,MatrixXd const&) throw (CRegressionException);
+		void fit();
+		void fit(bool const&);
+		void fit(VectorXd const&, MatrixXd const&);
+		void fit(VectorXd const&, MatrixXd const&, bool const&);
+		void predict(VectorXd*,MatrixXd const&);
 		
 
 };
@@ -187,10 +187,10 @@ class CLinearMixedRegression: public CRegression {
 		float64 getLogDelta();
 		float64 getLogSigma();
 
-		void fit() throw (CRegressionException);
-		void fit(VectorXd const&, MatrixXd const&, MatrixXd const&) throw (CRegressionException);
-		void predict(VectorXd*,MatrixXd const&, MatrixXd const&) throw (CRegressionException);
-        VectorXd predict(MatrixXd const&,MatrixXd const&) throw (CRegressionException);
+		void fit();
+		void fit(VectorXd const&, MatrixXd const&, MatrixXd const&);
+		void predict(VectorXd*,MatrixXd const&, MatrixXd const&);
+        VectorXd predict(MatrixXd const&,MatrixXd const&);
 		
 		void setK(MatrixXd const&);
 		void setInterval(uint const&);

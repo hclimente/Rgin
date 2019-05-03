@@ -1,12 +1,12 @@
 #include "gin/stats/CChi2.h"
 //#include "CGamma.h"
 
-void CChi2::__checkParameters(float64 const& k) throw (CChi2Exception) {
+void CChi2::__checkParameters(float64 const& k) {
 	if (k==0) throw CChi2Exception("Degress of freedom (k) cannont be zero!");
 	else if (k<0) throw CChi2Exception("Degress of freedom (k) cannont be negative!");
 }
 
-float64 CChi2::cdf(float64 const& x, float64 const& k) throw (CChi2Exception) {
+float64 CChi2::cdf(float64 const& x, float64 const& k) {
 	__checkParameters(k);
     return Cephes::chdtr(k,x);
     //Own Implementation
@@ -17,12 +17,12 @@ float64 CChi2::cdf(float64 const& x, float64 const& k) throw (CChi2Exception) {
 	}*/
 }
 
-float64 CChi2::logcdf(float64 const& x, float64 const& k) throw (CChi2Exception) {
+float64 CChi2::logcdf(float64 const& x, float64 const& k) {
 	__checkParameters(k);
 	return log(cdf(x,k));
 }
 
-float64 CChi2::sf(float64 const& x, float64 const& k) throw (CChi2Exception) {
+float64 CChi2::sf(float64 const& x, float64 const& k) {
 	__checkParameters(k);
     if(x < 0) return 1;
     else return Cephes::chdtrc(k,x);
@@ -31,29 +31,29 @@ float64 CChi2::sf(float64 const& x, float64 const& k) throw (CChi2Exception) {
 	//return CGamma::Special::complementedIncompleteGamma(0.5*x,0.5*k);
 }
 
-float64 CChi2::isf(float64 const& x, float64 const& k) throw (CChi2Exception) {
+float64 CChi2::isf(float64 const& x, float64 const& k) {
 	__checkParameters(k);
 	if(x>1.0 || x<0.0) throw CChi2Exception("x has to be in the range [0.0,1.0]!");
     return Cephes::chdtri(k,x);
 }
 
-float64 CChi2::logsf(float64 const& x, float64 const& k) throw (CChi2Exception) {
+float64 CChi2::logsf(float64 const& x, float64 const& k) {
 	__checkParameters(k);
 	return log(sf(x,k));
 }
 
-float64 CChi2::pdf(float64 const& x, float64 const& k) throw (CChi2Exception) {
+float64 CChi2::pdf(float64 const& x, float64 const& k) {
 	__checkParameters(k);
 	if(x<0.0) return 0.0;
 	return pow(x,0.5*k-1)*exp(-0.5*x)/(pow(2.0,0.5*k)*tgamma(0.5*k));
 }
 
-float64 CChi2::logpdf(float64 const& x, float64 const& k) throw (CChi2Exception) {
+float64 CChi2::logpdf(float64 const& x, float64 const& k) {
 	__checkParameters(k);
 	return log(pdf(x,k));
 }
 
-MatrixXd CChi2::get2DContingencyTable(VectorXd const& x, VectorXd const& Y, bool pseudoCounts) throw (CChi2Exception) {
+MatrixXd CChi2::get2DContingencyTable(VectorXd const& x, VectorXd const& Y, bool pseudoCounts) {
 
 	if (x.size() != Y.size()) throw CChi2Exception("Variable vector lengths are different.");
 
@@ -84,7 +84,7 @@ MatrixXd CChi2::get2DContingencyTable(VectorXd const& x, VectorXd const& Y, bool
 	return table;
 }
 
-double CChi2::calculateChi2(MatrixXd const& table) throw (CChi2Exception) {
+double CChi2::calculateChi2(MatrixXd const& table) {
 	double N = table.sum();
 
 	MatrixXd p_phenotype = table.rowwise().sum() / N;
@@ -99,7 +99,7 @@ double CChi2::calculateChi2(MatrixXd const& table) throw (CChi2Exception) {
 	return chisq;
 }
 
-float64 CChi2::calculateChi2Trend(MatrixXd const& table, VectorXd const& model) throw (CChi2Exception) {
+float64 CChi2::calculateChi2Trend(MatrixXd const& table, VectorXd const& model) {
 	double N = table.sum();
 
 	double T1 = (table.row(0) * model).sum();

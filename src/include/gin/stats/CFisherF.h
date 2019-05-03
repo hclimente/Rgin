@@ -26,17 +26,17 @@ class CFisherFException {
 class CFisherF {
 	
 	private:
-		static void __checkParameters(float64 const&, int const&, int const&) throw (CFisherFException);
+		static void __checkParameters(float64 const&, int const&, int const&);
 
 	public:
-		static float64 cdf(float64 const&, int const&, int const&) throw (CFisherFException);
-		static float64 logcdf(float64 const&, int const&, int const&) throw (CFisherFException);
-		static float64 pdf(float64 const&, int const&, int const&) throw (CFisherFException);
-		static float64 ppf(float64 const&, int const&, int const&) throw (CFisherFException);
-		static float64 logpdf(float64 const&, int const&, int const&) throw (CFisherFException);
-		static float64 sf(float64 const&, int const&, int const&) throw (CFisherFException);
-		static float64 isf(float64 const&, int const&, int const&) throw (CFisherFException);
-		static float64 logsf(float64 const&, int const&, int const&) throw (CFisherFException);
+		static float64 cdf(float64 const&, int const&, int const&);
+		static float64 logcdf(float64 const&, int const&, int const&);
+		static float64 pdf(float64 const&, int const&, int const&);
+		static float64 ppf(float64 const&, int const&, int const&);
+		static float64 logpdf(float64 const&, int const&, int const&);
+		static float64 sf(float64 const&, int const&, int const&);
+		static float64 isf(float64 const&, int const&, int const&);
+		static float64 logsf(float64 const&, int const&, int const&);
 
 };
 	

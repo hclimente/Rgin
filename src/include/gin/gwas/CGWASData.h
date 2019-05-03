@@ -88,25 +88,25 @@ class CGWASDataHelper {
 		
 		//Class methods for more flexible interactions
 		void encodeHomozygousData(std::vector< std::vector<char> > const&,
-					  uint64 const&, uint64 const&) throw (CGWASDataException);
+					  uint64 const&, uint64 const&);
 		void encodeHeterozygousData(std::vector< std::vector<char> > const&,
-					  uint64 const&, uint64 const&, uint const&) throw (CGWASDataException);
+					  uint64 const&, uint64 const&, uint const&);
 
 		void releaseMemory();
 		MatrixXd getEncodedData();
 		VectorXd getMAF();
 
 		//static member functions for C++ only
-		static void encodeHomozygousData(GWASData*) throw (CGWASDataException);
-		static void encodeHeterozygousData(GWASData*) throw (CGWASDataException);
-		static void encodeHeterozygousData(GWASData*,uint const&) throw (CGWASDataException);
-		static void filterSNPsByMAF(GWASData*,float64 const&) throw (CGWASDataException);
-		static void filterNonInformativeSNPs(GWASData*) throw (CGWASDataException);
-		//static void filterSNPsBySmallIndel(GWASData*,int const&) throw (CGWASDataException);
-		static void filterUniqueSNPs(GWASData*) throw (CGWASDataException);
-		static void createSNPHash(GWASData*) throw (CGWASDataException);
-		static GWASData removeSamples4MissingData(GWASData const&, uint const&) throw (CGWASDataException);
-		static GWASData removeSamples4MissingData(GWASData const&, uint const&, bool const) throw (CGWASDataException);
+		static void encodeHomozygousData(GWASData*);
+		static void encodeHeterozygousData(GWASData*);
+		static void encodeHeterozygousData(GWASData*,uint const&);
+		static void filterSNPsByMAF(GWASData*,float64 const&);
+		static void filterNonInformativeSNPs(GWASData*);
+		//static void filterSNPsBySmallIndel(GWASData*,int const&);
+		static void filterUniqueSNPs(GWASData*);
+		static void createSNPHash(GWASData*);
+		static GWASData removeSamples4MissingData(GWASData const&, uint const&);
+		static GWASData removeSamples4MissingData(GWASData const&, uint const&, bool const);
 };
 
 #endif //CGWASDATA_CLASS

@@ -44,8 +44,8 @@ class CCrossValidation {
 		//Split data into k stratified folds
 		void stratifiedKFold(uint const&, VectorXd const&);
 
-		VectorXd getTrainingIndices(uint const&) const throw (CCrossValidationException);
-		VectorXd getTestingIndices(uint const&) const throw (CCrossValidationException);
+		VectorXd getTrainingIndices(uint const&) const;
+		VectorXd getTestingIndices(uint const&) const;
 
 		uint size();
 };

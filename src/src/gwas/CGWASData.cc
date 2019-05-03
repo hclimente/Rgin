@@ -35,7 +35,7 @@ VectorXd CGWASDataHelper::getMAF() {
 
 void CGWASDataHelper::encodeHomozygousData(std::vector< std::vector<char> > const& raw_snps, 
                        uint64 const& n_snps, 
-                       uint64 const& n_samples) throw (CGWASDataException) {
+                       uint64 const& n_samples) {
     if(raw_snps.size()==0)
         throw CGWASDataException("Homozygous encoding error: GWASData object not initialized. raw_snps is empty.");
     std::locale loc;
@@ -114,7 +114,7 @@ void CGWASDataHelper::encodeHomozygousData(std::vector< std::vector<char> > cons
 void CGWASDataHelper::encodeHeterozygousData(std::vector< std::vector<char> > const& raw_snps, 
                          uint64 const& n_snps, 
                          uint64 const& n_samples,
-                         uint const& encoding) throw (CGWASDataException) {
+                         uint const& encoding) {
     if(raw_snps.size()==0)
         throw CGWASDataException("Heterozygous encoding error: GWASData object not initialized. raw_snps is empty.");
     std::locale loc;
@@ -261,7 +261,7 @@ void CGWASDataHelper::encodeHeterozygousData(std::vector< std::vector<char> > co
 
 }
 
-void CGWASDataHelper::encodeHomozygousData(GWASData* data) throw (CGWASDataException) {
+void CGWASDataHelper::encodeHomozygousData(GWASData* data) {
     if(data->raw_snps.size()==0)
         throw CGWASDataException("Homozygous encoding error: GWASData object not initialized. raw_snps is empty.");
     std::locale loc;
@@ -335,11 +335,11 @@ void CGWASDataHelper::encodeHomozygousData(GWASData* data) throw (CGWASDataExcep
     }
 }
 
-void CGWASDataHelper::encodeHeterozygousData(GWASData* data) throw (CGWASDataException) {
+void CGWASDataHelper::encodeHeterozygousData(GWASData* data) {
     encodeHeterozygousData(data,CGWASDataHelper::additive);
 }
 
-void CGWASDataHelper::encodeHeterozygousData(GWASData* data, uint const& encoding) throw (CGWASDataException) {
+void CGWASDataHelper::encodeHeterozygousData(GWASData* data, uint const& encoding) {
 
 	if(data->raw_snps.size() == 0) {
 	    throw CGWASDataException("Heterozygous encoding error: GWASData object not initialized. raw_snps is empty.");
@@ -506,7 +506,7 @@ void CGWASDataHelper::encodeHeterozygousData(GWASData* data, uint const& encodin
     }
 }
 
-void CGWASDataHelper::filterNonInformativeSNPs(GWASData* data) throw (CGWASDataException) {
+void CGWASDataHelper::filterNonInformativeSNPs(GWASData* data) {
     if(data->X.cols()==0)
         throw CGWASDataException("GWAS Data object not initialized or SNP data not encoded");
     std::vector<uint64> indices_v;
@@ -551,7 +551,7 @@ void CGWASDataHelper::filterNonInformativeSNPs(GWASData* data) throw (CGWASDataE
     data->n_snps = indices_v.size();
 }
 
-void CGWASDataHelper::filterSNPsByMAF(GWASData* data, float64 const& maf) throw (CGWASDataException) {
+void CGWASDataHelper::filterSNPsByMAF(GWASData* data, float64 const& maf) {
     if(data->MAF.size()==0)
         throw CGWASDataException("Data object not initialized or SNP data not encoded!");
     std::vector<uint64> maf_indices_v;
@@ -595,7 +595,7 @@ void CGWASDataHelper::filterSNPsByMAF(GWASData* data, float64 const& maf) throw 
 }
 
 /*
-void CGWASDataHelper::filterSNPsBySmallIndel(GWASData* data, int const& indel) throw (CGWASDataException) {
+void CGWASDataHelper::filterSNPsBySmallIndel(GWASData* data, int const& indel) {
     if(data->small_indel.size()==0)
         throw CGWASDataException("Data object not initialized or SNP data not encoded!");
     if(indel!=0 && indel!=1) 
@@ -646,7 +646,7 @@ void CGWASDataHelper::filterSNPsBySmallIndel(GWASData* data, int const& indel) t
 */
         
 //TODO: Implement filtering method
-void CGWASDataHelper::filterUniqueSNPs(GWASData* data) throw (CGWASDataException) {
+void CGWASDataHelper::filterUniqueSNPs(GWASData* data) {
     VectorXd randv = urand(data->X.rows());
     logging(GIN_INFO,randv.rows());
     logging(GIN_INFO,data->X.rows());
@@ -654,7 +654,7 @@ void CGWASDataHelper::filterUniqueSNPs(GWASData* data) throw (CGWASDataException
     logging(GIN_STATUS,hash.rows());
 }
 
-void CGWASDataHelper::createSNPHash(GWASData* data) throw (CGWASDataException) {
+void CGWASDataHelper::createSNPHash(GWASData* data) {
     /*VectorXd snp_hash = VectorXd::Zero(data->X.cols());
     data->n_unique_snps = 0;
     snp_hash(0) = 1;
@@ -717,11 +717,11 @@ void CGWASDataHelper::createSNPHash(GWASData* data) throw (CGWASDataException) {
     data->n_unique_snps = std::distance(tmp.begin(),it);
 }
 
-GWASData CGWASDataHelper::removeSamples4MissingData(GWASData const& data, uint const& phenotype_id) throw (CGWASDataException) {
+GWASData CGWASDataHelper::removeSamples4MissingData(GWASData const& data, uint const& phenotype_id) {
     return removeSamples4MissingData(data,phenotype_id,false);
 }
 
-GWASData CGWASDataHelper::removeSamples4MissingData(GWASData const& data, uint const& phenotype_id, bool const copy_raw) throw (CGWASDataException) {
+GWASData CGWASDataHelper::removeSamples4MissingData(GWASData const& data, uint const& phenotype_id, bool const copy_raw) {
     GWASData newData;
     std::vector<float64> splice_indices;
     std::vector<std::string> sample_ids;

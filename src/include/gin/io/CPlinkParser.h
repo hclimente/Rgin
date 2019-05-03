@@ -55,14 +55,11 @@ class CPlinkParser {
 		const static std::map<std::string,char> __iupac_map;
 	public:
 		static void readPEDFile(std::string const&,
-					GWASData*) 
-					throw (CPlinkParserException);
+					GWASData*);
 		static void readMAPFile(std::string const&,
-					GWASData*) 
-					throw (CPlinkParserException);
+					GWASData*);
 		static void readPhenotypeFile(std::string const&,
-					      GWASData*) 
-					      throw (CPlinkParserException);
+					      GWASData*);
 	
 };
 

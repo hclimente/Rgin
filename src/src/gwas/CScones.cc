@@ -40,7 +40,7 @@ CScones::CScones(CSconesSettings const& settings) {
     __binary_y = false;
 }
 
-CScones::CScones(VectorXd const& y, MatrixXd const& X, SparseMatrixXd const& L) throw (CSconesException) {
+CScones::CScones(VectorXd const& y, MatrixXd const& X, SparseMatrixXd const& L) {
 	CSconesSettings settings;
 	__settings = settings;
 	__covs_set = false;
@@ -60,7 +60,7 @@ CScones::CScones(VectorXd const& y, MatrixXd const& X, SparseMatrixXd const& L) 
 	__L = __computeLaplacianMatrix();
 }
 
-CScones::CScones(VectorXd const& y, MatrixXd const& X, SparseMatrixXd const& L, CSconesSettings const& settings) throw (CSconesException) {
+CScones::CScones(VectorXd const& y, MatrixXd const& X, SparseMatrixXd const& L, CSconesSettings const& settings) {
 	__settings = settings;
 	__covs_set = false;
     __binary_y = false;
@@ -79,7 +79,7 @@ CScones::CScones(VectorXd const& y, MatrixXd const& X, SparseMatrixXd const& L, 
 	__L = __computeLaplacianMatrix();
 }
 
-CScones::CScones(VectorXd const& y, MatrixXd const& X, SparseMatrixXd const& L, MatrixXd const& covs) throw (CSconesException) {
+CScones::CScones(VectorXd const& y, MatrixXd const& X, SparseMatrixXd const& L, MatrixXd const& covs) {
 	CSconesSettings settings;
 	__settings = settings;
 	__covs_set = true;
@@ -100,7 +100,7 @@ CScones::CScones(VectorXd const& y, MatrixXd const& X, SparseMatrixXd const& L, 
 	__L = __computeLaplacianMatrix();
 }
 
-CScones::CScones(VectorXd const& y, MatrixXd const& X, SparseMatrixXd const& L, MatrixXd const& covs, CSconesSettings const& settings) throw (CSconesException) {
+CScones::CScones(VectorXd const& y, MatrixXd const& X, SparseMatrixXd const& L, MatrixXd const& covs, CSconesSettings const& settings) {
 	__settings = settings;
 	__covs_set = true;
     __binary_y = false;
@@ -120,7 +120,7 @@ CScones::CScones(VectorXd const& y, MatrixXd const& X, SparseMatrixXd const& L, 
 	__L = __computeLaplacianMatrix();
 }
 
-void CScones::__checkdata() throw (CSconesException) {
+void CScones::__checkdata() {
 	if(__y.cols()>1) throw CSconesException("Phenotype y has wrong dimensions! (n x 1)!");
 	if(__X.rows() != __y.rows()) throw CSconesException("Genotype X and Phenotype y must have the same number of samples n!");
 	if(__W.rows() != __W.cols()) throw CSconesException("Network L must be a squared matrix with size features m x m!");
@@ -351,7 +351,7 @@ void CScones::__optimize_objective(VectorXd const& c, float64 const& lambda, Vec
 	}
 }
 
-void CScones::__gridsearch(VectorXd const& y, MatrixXd const& x, MatrixXd const& covs) throw (CSconesException) {
+void CScones::__gridsearch(VectorXd const& y, MatrixXd const& x, MatrixXd const& covs) {
 	VectorXd r;
 	if(__covs_set) {
 		if(__binary_y==true) {
@@ -384,7 +384,7 @@ void CScones::__gridsearch(VectorXd const& y, MatrixXd const& x, MatrixXd const&
 	__result_stack.push_back(lambda_stack);
 }
 
-void CScones::test_associations() throw (CSconesException) {
+void CScones::test_associations() {
 	//Select the correct Regression Model
 	__selectRegressionModel();
 	if(__settings.autoParameters) {
@@ -472,7 +472,7 @@ void CScones::test_associations() throw (CSconesException) {
      * in all folds but are in the global training. */
 }
 
-MatrixXd CScones::__evaluateConsistency() throw (CSconesException){
+MatrixXd CScones::__evaluateConsistency() {
     MatrixXd gridResults;
     // N number of features
     float64 N = __W.outerSize();
@@ -506,7 +506,7 @@ MatrixXd CScones::__evaluateConsistency() throw (CSconesException){
     return gridResults;
 }
 
-MatrixXd CScones::__evaluateInformation() throw (CSconesException) {
+MatrixXd CScones::__evaluateInformation() {
     MatrixXd gridResults;
 
     // number of features
