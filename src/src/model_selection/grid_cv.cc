@@ -129,7 +129,7 @@ void GridCV::scoreModels(uint scoring_function) {
 			__setAggregatedFolds(e, l, aggregatedFolds(e,l) / __folds);
 
 			int solutionSize = aggregatedFolds(e,l).array().sum();
-			if (solutionSize > (__X->cols() * 0.05) | solutionSize == 0) {
+			if ((solutionSize > (__X->cols() * 0.05)) | (solutionSize == 0)) {
 				__scoredFolds(e, l) = -1e31;
 			} else {
 				if (scoring_function == CONSISTENCY) {
