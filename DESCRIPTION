@@ -3,7 +3,7 @@ Title: gin in R
 Version: 1.9.0
 Authors@R: c(
   person("Hector", "Climente-Gonzalez", role = c("aut", "cre"), 
-         email = "hector.climente@curie.fr"),
+         email = "hector.climente@riken.jp"),
   person("Dominik Gerhard", "Grimm", role = "aut"),
   person("Chloe-Agathe", "Azencott", role = "aut"))
 Maintainer: Hector Climente-Gonzalez <hector.climente@curie.fr>
